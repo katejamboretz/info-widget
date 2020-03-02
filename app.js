@@ -28,6 +28,23 @@ $(document).ready(function() {
       "<button data-term = " + arrNature[i] + ">" + arrNature[i] + "</button>"
     );
   }
+
+  // Create an on click function for the submit button
+  // to add the input to the array, then regenerate the buttons
+
+  $("#submit-term").on("click", function(event) {
+    event.preventDefault();
+    var newItem = $("#submit-item")
+      .val()
+      .trim();
+    arrNature.push(newItem);
+    $("#button-panel").empty();
+    for (var i = 0; i < arrNature.length; i++) {
+      $("#button-panel").append(
+        "<button data-term = " + arrNature[i] + ">" + arrNature[i] + "</button>"
+      );
+    }
+  });
 });
 
 // Create an on click function for the submit button

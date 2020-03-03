@@ -73,8 +73,6 @@ $(document).ready(function() {
     }).then(function(response) {
       var result = response.data;
 
-      console.log(result);
-
       for (var i = 0; i < result.length; i++) {
         var gifDiv = $("<div>");
 
@@ -83,23 +81,36 @@ $(document).ready(function() {
         var p = $("<p>").text("Rating: " + rating);
 
         var gifImage = $("<img>");
-        gifImage.attr("src", result[i].images.fixed_height.url);
+        gifImage.attr("src", result[i].images.original_still.url);
+        gifImage.attr("data-still", result[i].images.original_still.url);
+        gifImage.attr("data-animate", result[i].images.original.url);
+        gifImage.attr("data-state", "still");
+        gifImage.attr("class", "gif");
 
         gifDiv.append(p);
         gifDiv.append(gifImage);
 
         $("#giphy-panel").append(gifDiv);
       }
+
+      // include an on-click event to click-on, click-off GIPHY animation
+      // use pausing-gifs.html as a template
+
+      $(".gif").on("click", function() {
+        var state = $(this).attr("data-state");
+
+        if (state === "still") {
+          var animateURL = $(this).attr("data-animate");
+          $(this).attr("src", animateURL);
+          $(this).attr("data-state", "animate");
+        }
+
+        if (state === "animate") {
+          var stillURL = $(this).attr("data-still");
+          $(this).attr("src", stillURL);
+          $(this).attr("data-state", "still");
+        }
+      });
     });
   });
-
-  // THEN, create a request for rating, image and display 10 images
-
-  // append request to giphy-panel div
 });
-
-// Create API request
-
-// THEN, create a request for rating, image and display 10 images
-
-// include an on-click event to click-on, click-off GIPHY animation

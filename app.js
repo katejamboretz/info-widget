@@ -54,7 +54,7 @@ $(document).ready(function() {
 
   $(".term-button").on("click", function() {
     // empty the giphy-panel div of previous content
-    $("#giphy-panel").empty();
+    // $("#giphy-panel").empty();
     // create a url
     var searchItem = $(this).attr("data-term");
 
@@ -87,10 +87,10 @@ $(document).ready(function() {
         gifImage.attr("data-state", "still");
         gifImage.attr("class", "gif");
 
-        gifDiv.append(p);
         gifDiv.append(gifImage);
+        gifDiv.append(p);
 
-        $("#giphy-panel").append(gifDiv);
+        $("#giphy-panel").prepend(gifDiv);
       }
 
       // include an on-click event to click-on, click-off GIPHY animation
